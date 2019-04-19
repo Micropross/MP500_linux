@@ -486,6 +486,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
 	imx6q-kp-tpc.dtb \
 	imx6q-marsboard.dtb \
 	imx6q-mccmon6.dtb \
+	imx6q-mp500.dtb \
 	imx6q-nitrogen6x.dtb \
 	imx6q-nitrogen6_max.dtb \
 	imx6q-nitrogen6_som2.dtb \
