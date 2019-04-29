@@ -77,6 +77,14 @@
 				MX6QDL_PAD_NANDF_D7__SD2_DATA7		0x17059
 			>;
 		};
+		pinctrl_ecspi3: ecspi3grp {
+			fsl,pins = <
+				MX6QDL_PAD_DISP0_DAT2__ECSPI3_MISO	0x100b1
+				MX6QDL_PAD_DISP0_DAT1__ECSPI3_MOSI	0x100b1
+				MX6QDL_PAD_DISP0_DAT0__ECSPI3_SCLK	0x100b1
+				MX6QDL_PAD_DISP0_DAT3__ECSPI3_SS0	0x100b1
+			>;
+		};
 
 	};
 
@@ -97,3 +105,36 @@
 	status = "okay";
 };
 
+&ecspi3 {
+	fsl,spi-num-chipselects = <1>;
+	cs-gpios = <&gpio4 24 GPIO_ACTIVE_LOW>;
+	pinctrl-names = "default";
+	pinctrl-0 = <>;//&pinctrl_ecspi3>;
+
+	status = "okay";
+
+	flash: m25p80@0 {
+		compatible = "st,m25p32";
+		spi-max-frequency = <25000000>;
+		reg = <0>;
+		#address-cells = <1>;
+		#size-cells = <1>;
+
+		partition@0 {
+			label = "init";
+			reg = <0x0 0x90000>;
+			read-only;
+		};
+		partition@90000 {
+			label = "uboot_data";
+			reg = <0x90000 0xc0000>;
+			read-only;
+		};
+		partition@150000 {
+			label = "uboot";
+			reg = <0x150000 0xc0000>;
+			read-only;
+		};
+
+	};
+};
