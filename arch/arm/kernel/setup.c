@@ -950,6 +950,12 @@ static int __init init_machine_late(void)
 					      &system_serial);
 		if (ret)
 			system_serial = NULL;
+
+		ret = of_property_read_u32(root, "revision-number",
+					      &system_rev);
+		if (ret)
+			system_rev = 0;
+
 	}
 
 	if (!system_serial)
